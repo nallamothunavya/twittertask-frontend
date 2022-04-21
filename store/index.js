@@ -50,11 +50,13 @@ const mutations = {
       console.log("aftr set" + state.current_comments)
   },
 
-  update(state, data) {
-    const index = state.posts.findIndex(post => post.id === data.id)
-    state.posts[index].title = data.title
-    
-  }
+  updateTweet(state, data) {
+    const index = state.tweets.findIndex(tweet => tweet.tweet_id === data.tweet_id)
+    console.log(" required index is : " + index);
+    console.log(" tweet in index " + index + " is " + state.tweets[index]);
+    state.tweets[index].title = data.title
+    state.current_tweet.title = data.title
+}
 
   
 }
@@ -147,19 +149,11 @@ const actions = {
     // commit('createdNewPost', res.data)
 },
 
-async deleteTweet({ commit, state },) {
-    console.log("enterd delete")
-    try{
-    const res = await this.$axios.delete('post/'+state.tweet_id)
-    console.log("status "+res.status)
-    if(res.status == 200)
-    alert("Deleted Successfully")
-    }catch(error){
-        console.log("error")
-    if(res.status == 404)
-    alert('You Cannot Delete others posts')
-    }
-    // commit('createdNewPost', res.data)
+deleteTweet(state, id) {
+    state.tweets = state.tweets.filter(function (item) {
+        console.log(" to check : " + item.tweet_id + "  with " + id);
+        return item.tweet_id != id
+    });
 },
 
  async update({ commit }, data) {

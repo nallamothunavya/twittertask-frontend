@@ -9,9 +9,44 @@
     </div>
     <div>
       <h1>{{ tweet_title }}</h1>
+    
+    <input v-model="newTweetText" v-if="isUpdating" type="text" />
+      <p v-else>{{ current_tweet.title }}</p>
+      <div class="parent">
+        <div class="tweet-item">
+          <div
+            class="btns"
+            v-if="current_tweet.user_id == $store.state.user_id"
+          >
+            <b-button
+              v-if="!isUpdating"
+              pill
+              size="sm"
+              v-on:click="updateTweet"
+              variant="warning"
+              >Update</b-button
+            >
+            <b-button
+              @click="deleteTweet"
+              v-if="!isUpdating"
+              class="btn"
+              pill
+              size="sm"
+              variant="danger"
+              >Delete</b-button
+            >
+            <b-button
+              v-else
+              pill
+              size="sm"
+              @click="submitTweet"
+              variant="success"
+              >Submit</b-button
+            >
+          </div>
+        </div>
+      </div>
     </div>
-    <button @click="DeletePost">delete tweet</button>
-    <button @click="UpdatePost">update</button>
     
     <div>
     </div>
@@ -49,28 +84,31 @@ export default {
     DeleteComment(id) {
       this.$store.dispatch('deleteComment', id)
     },
-    DeletePost() {
-      console.log('calling delete tweet')
-      this.$store.dispatch('deleteTweet')
+    updateTweet() {
+      this.isUpdating = true
+      this.newTweetText = this.current_tweet.title
     },
 
-    UpdatePost(id) {
-      this.$store.dispatch('update', id)
+    async submitTweet() {
+      this.isUpdating = false
+      let res = await this.$store.dispatch('updateTweet', {
+        tweet_id: this.current_tweet.tweet_id,
+        title: this.newTweetText,
+      })
+
+      if (res == true) {
+        // this.current_tweet.title = this.newTweetText
+      }
     },
-
-    update() {
-        this.isUpdating = true;
-      },
-
-      async submitTodo() {
-        this.isUpdating = false;
-        await this.$store.dispatch('update', {
-          id: this.item.id,
-          title: this.postText,
-          
-        });
-      },
   },
+  mounted() {
+
+    this.$store.dispatch('loadTweet', this.$route.params.id)
+  },
+
+
+   
+  
 }
 </script>
 
