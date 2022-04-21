@@ -1,0 +1,37 @@
+[
+  {
+    "name": "CreatePost",
+    "path": "/CreatePost",
+    "component": "C:\\\\Users\\\\Nspira\\\\Desktop\\\\twittertasks\\\\pages\\\\CreatePost.vue",
+    "chunkName": "pages/CreatePost",
+    "_name": "_d8762dae"
+  },
+  {
+    "name": "HomePage",
+    "path": "/HomePage",
+    "component": "C:\\\\Users\\\\Nspira\\\\Desktop\\\\twittertasks\\\\pages\\\\HomePage.vue",
+    "chunkName": "pages/HomePage",
+    "_name": "_7a97d48a"
+  },
+  {
+    "name": "PostPage",
+    "path": "/PostPage",
+    "component": "C:\\\\Users\\\\Nspira\\\\Desktop\\\\twittertasks\\\\pages\\\\PostPage.vue",
+    "chunkName": "pages/PostPage",
+    "_name": "_69fc687c"
+  },
+  {
+    "name": "ProfilePage",
+    "path": "/ProfilePage",
+    "component": "C:\\\\Users\\\\Nspira\\\\Desktop\\\\twittertasks\\\\pages\\\\ProfilePage.vue",
+    "chunkName": "pages/ProfilePage",
+    "_name": "_02bd3f8a"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "C:\\\\Users\\\\Nspira\\\\Desktop\\\\twittertasks\\\\pages\\\\index.vue",
+    "chunkName": "pages/index",
+    "_name": "_84ee26d6"
+  }
+]
