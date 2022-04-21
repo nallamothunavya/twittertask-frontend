@@ -2,10 +2,13 @@ const state = () => ({
   token: null,
   user_id: null,
   email: null,
-  name: null,
+  full_name: null, // again spelling mistake. It should be full_name
   is_register: false,
   Post: [],
   current_comments: [],
+  tweet_title: null,
+  tweet_id:null,
+ 
 })
 
 const getters = {}
@@ -22,6 +25,11 @@ const mutations = {
       state.name = data;
       alert(" Updated name successfully")
   },
+
+  setTweetTitle(state, data) {
+    state.tweet_title = data.title;
+    state.tweet_id = data.id;
+},
 
   setIsRegister(state, value) {
       state.is_register = value;
@@ -40,6 +48,12 @@ const mutations = {
       console.log("comments" + data)
       state.current_comments = data
       console.log("aftr set" + state.current_comments)
+  },
+
+  update(state, data) {
+    const index = state.posts.findIndex(post => post.id === data.id)
+    state.posts[index].title = data.title
+    
   }
 
   
@@ -110,15 +124,66 @@ const actions = {
       commit('setList', res.data)
   },
 
+
+  async GetPostById({ commit, state },id) {
+    const res = await this.$axios.get('Post/'+id)
+    console.log(res.data)
+    commit('setTweetTitle', res.data)
+
+},
+
   async createPost({ commit, state }, data) {
-      const res = await this.$axios.post('post', data)
+      const res = await this.$axios.post('Post', data)
       commit('createdNewPost', res.data)
+  },
+
+  async addComment({ commit, state }, data) {
+    const res = await this.$axios.post('comment', {"text":data, "post_id": state.tweet_id})
+    // commit('createdNewPost', res.data)
+  },
+
+  async deleteComment({ commit, state }, id) {
+    const res = await this.$axios.delete('comment/'+id,)
+    // commit('createdNewPost', res.data)
+},
+
+async deleteTweet({ commit, state },) {
+    console.log("enterd delete")
+    try{
+    const res = await this.$axios.delete('post/'+state.tweet_id)
+    console.log("status "+res.status)
+    if(res.status == 200)
+    alert("Deleted Successfully")
+    }catch(error){
+        console.log("error")
+    if(res.status == 404)
+    alert('You Cannot Delete others posts')
+    }
+    // commit('createdNewPost', res.data)
+},
+
+ async update({ commit }, data) {
+    await this.$axios
+      .put(
+        'post/' + data.id,
+        {title: data.title },
+        {
+          headers: {
+            Authorization: 'Bearer ' + this.state.token,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res)
+        console.log('called')
+        commit("update", data)
+      })
   },
 
   async updateProfile(state, data) {
       try {
           // Hit the backend api.
-          const res = await this.$axios.put('user/update/', data)
+          const res = await this.$axios.put('user/id', data)
 
           if (res.status == 204) {
               console.log(res)
@@ -136,15 +201,17 @@ const actions = {
       }
   },
 
-  async GetAllCommentsForPost({ commit, state }) {
+  async GetAllCommentsForPost({ commit, state },id) {
      
 
-      const res = await this.$axios.get('comment/16')
+      const res = await this.$axios.get('comment/'+id)
       console.log(res.data)
       commit('setComments', res.data)
 
   },
 
+  
+  
   
 }
 

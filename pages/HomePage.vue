@@ -40,7 +40,7 @@
         <b-card
           v-for="item in Post"
           :key="item.id"
-          v-on:click="moveToPostPage()"
+          v-on:click="moveToPostPage(item.id)"
           >{{ item.title }}
         </b-card>
       </b-collapse>
@@ -64,10 +64,12 @@ export default {
       this.$router.push('/ProfilePage')
     },
 
-    async moveToPostPage() {
-      // console.log('dispatching ' + $id)
-      this.$router.push('/PostPage')
-      await this.$store.dispatch('GetAllCommentsForPost')
+    async moveToPostPage(id) {
+      console.log('dispatching ' + id)
+           await this.$store.dispatch('GetPostById',id)
+      this.$router.push('/PostPage') 
+
+      await this.$store.dispatch('GetAllCommentsForPost',id)
     },
 
     moveToCreatePost() {

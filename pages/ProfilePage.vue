@@ -33,7 +33,8 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-
+<!-- One place you are writing 'name' and other place you are writing 'full_name' -->
+<!-- Use same variable name everywhere -->
     <h5>Full Name : {{ full_name }}</h5>
     <h5>Email : {{ email }}</h5>
 
@@ -56,7 +57,7 @@
 import { mapState } from 'vuex'
 export default {
   computed: {
-    ...mapState(['email', 'name']),
+    ...mapState(['email', 'full_name']),
   },
 
   methods: {
