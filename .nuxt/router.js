@@ -4,10 +4,10 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _d8762dae = () => interopDefault(import('..\\pages\\CreatePost.vue' /* webpackChunkName: "pages/CreatePost" */))
 const _7a97d48a = () => interopDefault(import('..\\pages\\HomePage.vue' /* webpackChunkName: "pages/HomePage" */))
-const _69fc687c = () => interopDefault(import('..\\pages\\PostPage.vue' /* webpackChunkName: "pages/PostPage" */))
+const _0063ef96 = () => interopDefault(import('..\\pages\\post\\index.vue' /* webpackChunkName: "pages/post/index" */))
 const _02bd3f8a = () => interopDefault(import('..\\pages\\ProfilePage.vue' /* webpackChunkName: "pages/ProfilePage" */))
+const _178ad846 = () => interopDefault(import('..\\pages\\post\\_id.vue' /* webpackChunkName: "pages/post/_id" */))
 const _84ee26d6 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
@@ -22,21 +22,21 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
-    path: "/CreatePost",
-    component: _d8762dae,
-    name: "CreatePost"
-  }, {
     path: "/HomePage",
     component: _7a97d48a,
     name: "HomePage"
   }, {
-    path: "/PostPage",
-    component: _69fc687c,
-    name: "PostPage"
+    path: "/post",
+    component: _0063ef96,
+    name: "post"
   }, {
     path: "/ProfilePage",
     component: _02bd3f8a,
     name: "ProfilePage"
+  }, {
+    path: "/post/:id",
+    component: _178ad846,
+    name: "post-id"
   }, {
     path: "/",
     component: _84ee26d6,

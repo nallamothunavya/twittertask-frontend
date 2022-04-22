@@ -66,14 +66,11 @@ export default {
 
     async moveToPostPage(id) {
       console.log('dispatching ' + id)
-           await this.$store.dispatch('GetPostById',id)
-      this.$router.push('/PostPage') 
-
-      await this.$store.dispatch('GetAllCommentsForPost',id)
+      this.$router.push('/post/' + id) 
     },
 
     moveToCreatePost() {
-      this.$router.push('/CreatePost')
+      this.$router.push('/post')
     },
   },
 }

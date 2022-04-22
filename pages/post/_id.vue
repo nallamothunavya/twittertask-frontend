@@ -76,12 +76,15 @@ export default {
       isUpdating: false,
       newPostText: '',
       title: '',
+      newComment:''
     }
   },
   methods: {
    
     async deleteComment(comment_id) {
       await this.$store.dispatch('deleteComment', comment_id)
+   await this.$store.dispatch('GetAllCommentsForPost', this.$route.params.id)
+
     },
 
     async createComment() {
@@ -90,23 +93,36 @@ export default {
         text: this.newComment,
         PostId: this.$route.params.id,
       })
+   await this.$store.dispatch('GetAllCommentsForPost', this.$route.params.id)
+
       // calling here. see?
-      await this.$store.dispatch('GetAllPosts')
+    //   await this.$store.dispatch('GetAllPosts')
+
     },
    updatePost() {
       this.isUpdating = true
-      // this.title = this.tweet.title
+      this.title = this.Post_title
+      
     },
     async submitPost() {
       this.isUpdating = false
-      await this.$store.dispatch('updatePost', this.title)
-      this.$store.commit('updatePost', this.title)
+      await this.$store.dispatch('updatePost', {
+        id: this.$route.params.id,
+        title: this.title,
+      })
+     
     },
     async deletePost(id) {
       await this.$store.dispatch('deletePost', id)
-      this.$router.push('/UserHome')
+      await this.$store.dispatch('GetAllPost')
+      this.$router.push('/HomePage')
     },
   },
+
+  async created() {
+   await this.$store.dispatch('GetPostById', this.$route.params.id)
+   await this.$store.dispatch('GetAllCommentsForPost', this.$route.params.id)
+  }
  
 }
 </script>

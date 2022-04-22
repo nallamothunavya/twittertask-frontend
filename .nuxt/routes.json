@@ -1,27 +1,27 @@
 [
   {
-    "name": "CreatePost",
-    "path": "/CreatePost",
-    "component": "C:\\\\Users\\\\Nspira\\\\Desktop\\\\twittertasks\\\\pages\\\\CreatePost.vue",
-    "chunkName": "pages/CreatePost"
-  },
-  {
     "name": "HomePage",
     "path": "/HomePage",
     "component": "C:\\\\Users\\\\Nspira\\\\Desktop\\\\twittertasks\\\\pages\\\\HomePage.vue",
     "chunkName": "pages/HomePage"
   },
   {
-    "name": "PostPage",
-    "path": "/PostPage",
-    "component": "C:\\\\Users\\\\Nspira\\\\Desktop\\\\twittertasks\\\\pages\\\\PostPage.vue",
-    "chunkName": "pages/PostPage"
+    "name": "post",
+    "path": "/post",
+    "component": "C:\\\\Users\\\\Nspira\\\\Desktop\\\\twittertasks\\\\pages\\\\post\\\\index.vue",
+    "chunkName": "pages/post/index"
   },
   {
     "name": "ProfilePage",
     "path": "/ProfilePage",
     "component": "C:\\\\Users\\\\Nspira\\\\Desktop\\\\twittertasks\\\\pages\\\\ProfilePage.vue",
     "chunkName": "pages/ProfilePage"
+  },
+  {
+    "name": "post-id",
+    "path": "/post/:id",
+    "component": "C:\\\\Users\\\\Nspira\\\\Desktop\\\\twittertasks\\\\pages\\\\post\\\\_id.vue",
+    "chunkName": "pages/post/_id"
   },
   {
     "name": "index",
