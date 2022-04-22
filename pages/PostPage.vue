@@ -12,8 +12,8 @@
             <input type="text" v-model="title" />
           </p>
         </div>
-        <h1 v-else>{{ tweet.title }}</h1>
-        <div class="btns" v-if="tweet.user_id == $store.state.userid">
+        <h1 v-else>{{ Post_title }}</h1>
+        <div class="btns" v-if="post_user_id == user_id">
           <button v-if="!isUpdating" class="btn" @click="updatePost">
             Update
           </button>
@@ -50,7 +50,7 @@
           :key="comment.id"
           ><p>{{ comment.text }}</p>
           <b-button
-            v-if="comment.user_id == $store.state.user_id"
+            v-if="comment.user_id == user_id"
             @click="deleteComment(comment.comment_id)"
             class="btn3"
             pill
@@ -69,7 +69,7 @@ import { mapState } from 'vuex'
 
 export default {
   computed: {
-    ...mapState(['current_comments', 'tweet','user_id']),
+    ...mapState(['current_comments', 'tweet','Post_title','post_user_id','user_id']),
   },
   data() {
     return {
@@ -86,7 +86,7 @@ export default {
 
     async createComment() {
       console.log(' in here to create a comment')
-      await this.$store.dispatch('createComment', {
+      await this.$store.dispatch('addComment', {
         text: this.newComment,
         PostId: this.$route.params.id,
       })
@@ -95,7 +95,7 @@ export default {
     },
    updatePost() {
       this.isUpdating = true
-      this.title = this.tweet.title
+      // this.title = this.tweet.title
     },
     async submitPost() {
       this.isUpdating = false

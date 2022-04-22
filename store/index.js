@@ -8,6 +8,7 @@ const state = () => ({
   current_comments: [],
   Post_title: null,
   Post_id:null,
+  post_user_id:null,
   Posts: [],
   tweet: [],
  
@@ -18,7 +19,8 @@ const getters = {}
 const mutations = {
   setToken(state, data) {
       state.token = data.token
-      state.user_id = data.user_id
+      state.user_id = data.id
+      console.log("userid"+state.user_id)
       state.email = data.email
       state.full_name = data.full_name
   },
@@ -31,6 +33,7 @@ const mutations = {
   setPostTitle(state, data) {
     state.Post_title = data.title;
     state.Post_id = data.id;
+    state.post_user_id = data.user_id;
 },
 
   setIsRegister(state, value) {
@@ -146,7 +149,7 @@ const actions = {
   },
 
   async addComment({ commit, state }, data) {
-    const res = await this.$axios.post('comment', {"text":data, "post_id": state.Post_id})
+    const res = await this.$axios.post('comment', {"text":data.text, "post_id": state.Post_id})
     // commit('createdNewPost', res.data)
   },
 
@@ -156,11 +159,12 @@ const actions = {
 },
 
 async updatePost({commit,state}, data){
-    const res = await this.$axios.put('http://localhost:5000/api/post/'+state.post_id,{title: data});
+    console.log("post id "+state.Post_id)
+    const res = await this.$axios.put('http://localhost:5000/api/post/'+state.Post_id,{title: data});
 },
 async deletePost({commit,state}, data){
     
-    const res = await this.$axios.delete('http://localhost:5000/api/post/'+state.post_id);
+    const res = await this.$axios.delete('http://localhost:5000/api/post/'+state.Post_id);
 },
 
 
