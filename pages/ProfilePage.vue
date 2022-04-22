@@ -33,8 +33,7 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-<!-- One place you are writing 'name' and other place you are writing 'full_name' -->
-<!-- Use same variable name everywhere -->
+
     <h5>Full Name : {{ full_name }}</h5>
     <h5>Email : {{ email }}</h5>
 
@@ -56,6 +55,11 @@
 <script>
 import { mapState } from 'vuex'
 export default {
+  data(){
+    return{
+      newName: ''
+    }
+  },
   computed: {
     ...mapState(['email', 'full_name']),
   },
@@ -73,14 +77,15 @@ export default {
     },
 
     moveToCreatePost() {
-      this.$router.push('/CreatePost')
+      this.$router.push('/post')
     },
 
     async updateProfile() {
       await this.$store.dispatch('updateProfile', {
-        name: this.newName,
+        full_name: this.newName,
       })
-      this.newName = ''
+      this.$store.commit('setName', this.newName)
+      this.newName = '';
     },
   },
 }

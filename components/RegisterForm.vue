@@ -19,11 +19,11 @@
     <h2>RegisterForm</h2>
     <div class="register-form">
       <b-form @submit.prevent="register">
-        <b-form-group id="input-group-1" label="Fullname" label-for="input-1">
+        <b-form-group id="input-group-1" label="fullname" label-for="input-1">
           <b-form-input
             type="text"
             id="input-1"
-            v-model="Fullname"
+            v-model="fullname"
             placeholder="Enter Fullname"
             required
           ></b-form-input>
@@ -59,14 +59,14 @@ export default {
   data() {
     return {
       email: '',
-      Fullname: '',
+      fullname: '',
       password: '',
     }
   },
   methods: {
     async register() {
       await this.$store.dispatch('registerUser', {
-        Fullname: this.fullname,
+        full_name: this.fullname,
         email: this.email,
         password: this.password,
       })

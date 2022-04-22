@@ -3,30 +3,35 @@
     "name": "HomePage",
     "path": "/HomePage",
     "component": "C:\\\\Users\\\\Nspira\\\\Desktop\\\\twittertasks\\\\pages\\\\HomePage.vue",
-    "chunkName": "pages/HomePage"
+    "chunkName": "pages/HomePage",
+    "_name": "_7a97d48a"
   },
   {
     "name": "post",
     "path": "/post",
     "component": "C:\\\\Users\\\\Nspira\\\\Desktop\\\\twittertasks\\\\pages\\\\post\\\\index.vue",
-    "chunkName": "pages/post/index"
+    "chunkName": "pages/post/index",
+    "_name": "_0063ef96"
   },
   {
     "name": "ProfilePage",
     "path": "/ProfilePage",
     "component": "C:\\\\Users\\\\Nspira\\\\Desktop\\\\twittertasks\\\\pages\\\\ProfilePage.vue",
-    "chunkName": "pages/ProfilePage"
+    "chunkName": "pages/ProfilePage",
+    "_name": "_02bd3f8a"
   },
   {
     "name": "post-id",
     "path": "/post/:id",
     "component": "C:\\\\Users\\\\Nspira\\\\Desktop\\\\twittertasks\\\\pages\\\\post\\\\_id.vue",
-    "chunkName": "pages/post/_id"
+    "chunkName": "pages/post/_id",
+    "_name": "_178ad846"
   },
   {
     "name": "index",
     "path": "/",
     "component": "C:\\\\Users\\\\Nspira\\\\Desktop\\\\twittertasks\\\\pages\\\\index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_84ee26d6"
   }
 ]

@@ -22,8 +22,8 @@
               <b-button
                 size="sm"
                 class="my-2 my-sm-0"
-                v-on:click="moveToProfile"
-                >Profile</b-button
+                
+                ><nuxt-link to="/ProfilePage">Profile</nuxt-link></b-button
               >
               <b-button size="sm" class="my-2 my-sm-0" v-on:click="moveToLogin"
                 >Logout</b-button

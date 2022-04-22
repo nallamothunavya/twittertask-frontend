@@ -17,14 +17,15 @@ const getters = {}
 const mutations = {
   setToken(state, data) {
     state.token = data.token
+    // alert(state.token)
     state.user_id = data.id
-    console.log('userid' + state.user_id)
+    // alert('userid' + state.user_id)
     state.email = data.email
     state.full_name = data.full_name
   },
 
   setName(state, data) {
-    state.name = data
+    state.full_name = data
     alert(' Updated name successfully')
   },
 
@@ -54,7 +55,7 @@ const mutations = {
   setComments(state, data) {
     console.log('comments' + data)
     state.current_comments = data
-    console.log('aftr set' + state.current_comments)
+    // console.log('aftr set' + state.current_comments)
   },
   setTweet(state, data) {
     state.tweet = data
@@ -75,11 +76,7 @@ const actions = {
     try {
       console.log('data:' + data)
 
-      const res = await this.$axios.post('user', {
-        full_name: data.Fullname,
-        email: data.email,
-        password: data.password,
-      })
+      const res = await this.$axios.post('user', data)
 
       if (res.status == 201) {
         console.log(res)
@@ -92,7 +89,7 @@ const actions = {
       }
     } catch (e) {
       console.log(' error while registering user : ' + e)
-      alert(' cannot register right now, please try again later')
+      alert(' cannot register right now, please try again later' + e)
     }
   },
 
@@ -104,12 +101,13 @@ const actions = {
         email: data.email,
         password: data.password,
       })
+      // console.log(res.data.id)
 
+      this.commit('setToken', res.data)
       if (res.status == 200) {
         console.log(res)
 
         // Set the token after the call is success.
-        this.commit('setToken', res.data)
         this.$axios.setHeader('Authorization', 'Bearer ' + res.data.token)
         // move to the homepage from login page.
         this.$router.push('/HomePage')
@@ -169,13 +167,13 @@ const actions = {
   async updateProfile(state, data) {
     try {
       // Hit the backend api.
-      const res = await this.$axios.put('user/id', data)
+      // alert(state.token)
+      const res = await this.$axios.put('user', data)
 
       if (res.status == 204) {
         console.log(res)
 
         // Set the name after the call is success.
-        this.commit('setName', data.name)
       } else {
         alert('Cannot update profile')
       }
