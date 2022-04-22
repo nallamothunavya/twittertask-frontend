@@ -51,7 +51,7 @@
           ><p>{{ comment.text }}</p>
           <b-button
             v-if="comment.user_id == user_id"
-            @click="deleteComment(comment.comment_id)"
+            @click="deleteComment(comment.id)"
             class="btn3"
             pill
             size="sm"
@@ -136,9 +136,6 @@ export default {
   position: relative;
   width: 10%;
   left: 80%;
-  // bottom: 20%;
-  //margin-left: 5%;
-  //margin-bottom: 5%;
-  //display: inline-block;
+ 
 }
 </style>
