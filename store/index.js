@@ -6,8 +6,10 @@ const state = () => ({
   is_register: false,
   Post: [],
   current_comments: [],
-  tweet_title: null,
-  tweet_id:null,
+  Post_title: null,
+  Post_id:null,
+  Posts: [],
+  tweet: [],
  
 })
 
@@ -26,9 +28,9 @@ const mutations = {
       alert(" Updated name successfully")
   },
 
-  setTweetTitle(state, data) {
-    state.tweet_title = data.title;
-    state.tweet_id = data.id;
+  setPostTitle(state, data) {
+    state.Post_title = data.title;
+    state.Post_id = data.id;
 },
 
   setIsRegister(state, value) {
@@ -44,19 +46,23 @@ const mutations = {
       this.$router.push('/HomePage')
   },
 
+  setCurrentPost(state, data) {
+    state.current_Post = data
+},
+
+
   setComments(state, data) {
       console.log("comments" + data)
       state.current_comments = data
       console.log("aftr set" + state.current_comments)
   },
-
-  updateTweet(state, data) {
-    const index = state.tweets.findIndex(tweet => tweet.tweet_id === data.tweet_id)
-    console.log(" required index is : " + index);
-    console.log(" tweet in index " + index + " is " + state.tweets[index]);
-    state.tweets[index].title = data.title
-    state.current_tweet.title = data.title
+  setTweet(state,data){
+    state.tweet = data
+},
+ updatePost(state, data){
+    state.tweet.title = data
 }
+
 
   
 }
@@ -130,7 +136,7 @@ const actions = {
   async GetPostById({ commit, state },id) {
     const res = await this.$axios.get('Post/'+id)
     console.log(res.data)
-    commit('setTweetTitle', res.data)
+    commit('setPostTitle', res.data)
 
 },
 
@@ -140,7 +146,7 @@ const actions = {
   },
 
   async addComment({ commit, state }, data) {
-    const res = await this.$axios.post('comment', {"text":data, "post_id": state.tweet_id})
+    const res = await this.$axios.post('comment', {"text":data, "post_id": state.Post_id})
     // commit('createdNewPost', res.data)
   },
 
@@ -149,30 +155,14 @@ const actions = {
     // commit('createdNewPost', res.data)
 },
 
-deleteTweet(state, id) {
-    state.tweets = state.tweets.filter(function (item) {
-        console.log(" to check : " + item.tweet_id + "  with " + id);
-        return item.tweet_id != id
-    });
+async updatePost({commit,state}, data){
+    const res = await this.$axios.put('http://localhost:5000/api/post/'+state.post_id,{title: data});
+},
+async deletePost({commit,state}, data){
+    
+    const res = await this.$axios.delete('http://localhost:5000/api/post/'+state.post_id);
 },
 
- async update({ commit }, data) {
-    await this.$axios
-      .put(
-        'post/' + data.id,
-        {title: data.title },
-        {
-          headers: {
-            Authorization: 'Bearer ' + this.state.token,
-          },
-        }
-      )
-      .then((res) => {
-        console.log(res)
-        console.log('called')
-        commit("update", data)
-      })
-  },
 
   async updateProfile(state, data) {
       try {
@@ -204,6 +194,11 @@ deleteTweet(state, id) {
 
   },
 
+
+  async createPost({ commit, state }, data) {
+    const res = await this.$axios.post('Post', data)
+    commit('createdNewPost', res.data)
+},
   
   
   

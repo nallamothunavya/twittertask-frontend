@@ -21,7 +21,7 @@
       <b-form @submit.prevent="register">
         <b-form-group id="input-group-1" label="Fullname" label-for="input-1">
           <b-form-input
-            type="Fullname"
+            type="text"
             id="input-1"
             v-model="Fullname"
             placeholder="Enter Fullname"
@@ -56,10 +56,17 @@
 
 <script>
 export default {
+  data() {
+    return {
+      email: '',
+      Fullname: '',
+      password: '',
+    }
+  },
   methods: {
     async register() {
       await this.$store.dispatch('registerUser', {
-        Fullname: this.Fullname,
+        Fullname: this.fullname,
         email: this.email,
         password: this.password,
       })
